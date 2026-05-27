@@ -81,8 +81,12 @@ jobs:
         id: hash1
         run: |
           set -e
+          # Hash code/style outputs and dep traces. Skip `.html` (RSC flight
+          # keys are non-deterministic) and the Next.js manifest JSONs (preview
+          # keys + internal module IDs vary per build). The bundle content
+          # itself in `.next/static` and the server `.js` chunks is stable.
           HASH=$(find .next/standalone .next/static -type f \
-            \( -name '*.js' -o -name '*.css' -o -name '*.html' -o -name '*.json' -o -name '*.txt' -o -name '*.nft.json' \) \
+            \( -name '*.js' -o -name '*.css' -o -name '*.nft.json' \) \
             -print0 2>/dev/null | sort -z | xargs -0 sha256sum | sha256sum | awk '{print $1}')
           echo "hash=$HASH" >> "$GITHUB_OUTPUT"
           echo "Build hash (first): $HASH"
@@ -97,8 +101,12 @@ jobs:
         id: hash2
         run: |
           set -e
+          # Hash code/style outputs and dep traces. Skip `.html` (RSC flight
+          # keys are non-deterministic) and the Next.js manifest JSONs (preview
+          # keys + internal module IDs vary per build). The bundle content
+          # itself in `.next/static` and the server `.js` chunks is stable.
           HASH=$(find .next/standalone .next/static -type f \
-            \( -name '*.js' -o -name '*.css' -o -name '*.html' -o -name '*.json' -o -name '*.txt' -o -name '*.nft.json' \) \
+            \( -name '*.js' -o -name '*.css' -o -name '*.nft.json' \) \
             -print0 2>/dev/null | sort -z | xargs -0 sha256sum | sha256sum | awk '{print $1}')
           echo "hash=$HASH" >> "$GITHUB_OUTPUT"
           echo "Build hash (second): $HASH"
