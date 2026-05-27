@@ -1,0 +1,71 @@
+:root {
+  /* ─── Brand accent ──────────────────────────────────────────── */
+  --color-brand-accent: #c2ff3d;
+  --color-brand-accent-text: #6b8a1a;
+
+  /* ─── Surfaces ──────────────────────────────────────────────── */
+  --color-bg-base: #0a0a0a;
+  --color-bg-elevated: #111111;
+  --color-bg-overlay: #181818;
+  --color-bg-inverse: #f5f5f5;
+
+  /* ─── Neutrals ──────────────────────────────────────────────── */
+  --color-neutral-0: #ffffff;
+  --color-neutral-100: #e8e8e8;
+  --color-neutral-300: #a0a0a0;
+  --color-neutral-400: #888888;
+  --color-neutral-600: #444444;
+  --color-neutral-700: #2e2e2e;
+  --color-neutral-800: #1f1f1f;
+  --color-neutral-900: #111111;
+  --color-neutral-1000: #0a0a0a;
+
+  /* ─── Semantic (13 canonical tokens) ────────────────────────── */
+  --color-text-primary: #ffffff;
+  --color-text-secondary: #a0a0a0;
+  --color-text-tertiary: #888888;
+  --color-text-inverse: #0a0a0a;
+  --color-text-accent: #c2ff3d;
+  --color-bg-primary: #0a0a0a;
+  --color-border-default: #1f1f1f;
+  --color-border-strong: #2e2e2e;
+  --color-success: #4ade80;
+  --color-warning: #fbbf24;
+  --color-error: #f87171;
+  --color-info: #60a5fa;
+  --color-accent-on-light: #6b8a1a;
+
+  /* ─── Type scale (13 tokens, rem at 16px root) ──────────────── */
+  --text-display-1: 4.5rem;
+  --text-display-2: 3.5rem;
+  --text-h1: 2.5rem;
+  --text-h2: 2rem;
+  --text-h3: 1.5rem;
+  --text-h4: 1.25rem;
+  --text-body-lg: 1.125rem;
+  --text-body: 1rem;
+  --text-body-sm: 0.875rem;
+  --text-label: 0.8125rem;
+  --text-overline: 0.6875rem;
+  --text-mono: 0.875rem;
+  --text-mono-sm: 0.75rem;
+
+  /* ─── Type scale (mobile overrides) ─────────────────────────── */
+  --text-display-1-mobile: 2.75rem;
+  --text-display-2-mobile: 2.25rem;
+  --text-h1-mobile: 1.75rem;
+  --text-h2-mobile: 1.5rem;
+  --text-h3-mobile: 1.25rem;
+
+  /* ─── Motion ────────────────────────────────────────────────── */
+  --motion-easing-snap: cubic-bezier(0.16, 1, 0.3, 1);
+  --motion-easing-standard: cubic-bezier(0.4, 0, 0.2, 1);
+  --motion-easing-exit: cubic-bezier(0.4, 0, 1, 1);
+  --motion-easing-linear: linear;
+
+  --motion-duration-instant: 80ms;
+  --motion-duration-fast: 150ms;
+  --motion-duration-default: 200ms;
+  --motion-duration-slow: 350ms;
+  --motion-duration-brand: 500ms;
+}
