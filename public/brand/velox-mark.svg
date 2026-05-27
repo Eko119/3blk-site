@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 56 56" width="56" height="56" role="img" aria-label="Velox mark">
+  <title>Velox mark</title>
+  <!-- V mark only (stroke). Use for contexts too small for full lockup. -->
+  <!-- Transparent background. Place on #0A0A0A or brand dark surface. -->
+  <g transform="translate(4,4)">
+    <line x1="6" y1="4" x2="24" y2="44" stroke="#C2FF3D" stroke-width="4" stroke-linecap="square"/>
+    <line x1="42" y1="4" x2="24" y2="44" stroke="#C2FF3D" stroke-width="5" stroke-linecap="square"/>
+  </g>
+</svg>

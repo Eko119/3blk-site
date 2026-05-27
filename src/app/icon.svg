@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 56 56" width="56" height="56" role="img" aria-label="Velox mark">
+  <title>Velox mark</title>
+  <!--
+    Filled triangle mark (Variant 03). Primary use: favicon, app icon, social avatar,
+    embroidery. Maximum legibility at minimum size. Solid form survives 16px.
+    Transparent background. Use on #0A0A0A surface.
+  -->
+  <g transform="translate(4,4)">
+    <polygon points="4,4 44,4 24,44" fill="#C2FF3D"/>
+  </g>
+</svg>
