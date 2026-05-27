@@ -6,7 +6,6 @@
       "startServerReadyPattern": "Ready in",
       "numberOfRuns": 3,
       "settings": {
-        "preset": "mobile",
         "chromeFlags": "--no-sandbox --headless=new --disable-gpu"
       }
     },

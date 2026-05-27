@@ -46,7 +46,7 @@ export default function RootLayout({
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: buildJsonLd() }}
         />
-        <Analytics />
+        {process.env.VERCEL_ENV ? <Analytics /> : null}
       </body>
     </html>
   );
