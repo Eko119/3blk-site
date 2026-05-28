@@ -1,5 +1,5 @@
 import { Container } from "../primitives/Container";
-import { VeloxLogo } from "../brand/VeloxLogo";
+import { ThreeBlkLogo } from "../brand/ThreeBlkLogo";
 import { SITE } from "@/lib/site";
 
 export function Footer() {
@@ -8,7 +8,7 @@ export function Footer() {
     <footer className="border-t border-border-default py-12 md:py-16">
       <Container className="flex flex-col gap-8 md:flex-row md:items-center md:justify-between">
         <div className="flex items-center gap-4">
-          <VeloxLogo variant="mark-filled" className="h-8 w-8" />
+          <ThreeBlkLogo variant="mark-filled" className="h-8 w-8" />
           <div className="flex flex-col">
             <span className="text-label text-text-primary">{SITE.name}</span>
             <span className="text-body-sm text-text-tertiary">

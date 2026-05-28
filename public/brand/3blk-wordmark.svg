@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 40" width="120" height="40" role="img" aria-label="3BLK">
+  <title>3BLK</title>
+  <!--
+    Wordmark only. Use inline in text contexts and in extremely
+    constrained horizontal space where the mark cannot accompany.
+  -->
+  <text x="0" y="30" font-family="'Geist Sans', system-ui, sans-serif" font-weight="700" font-size="28" fill="#FFFFFF" letter-spacing="-1.12">3BLK</text>
+</svg>

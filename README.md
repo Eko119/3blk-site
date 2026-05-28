@@ -1,4 +1,4 @@
-# Velox
+# 3BLK
 
 Solo digital studio site. Static-first Next.js 15, deterministic build, deploys to Vercel.
 

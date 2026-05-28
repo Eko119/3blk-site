@@ -1,5 +1,5 @@
 import { Container } from "../primitives/Container";
-import { VeloxLogo } from "../brand/VeloxLogo";
+import { ThreeBlkLogo } from "../brand/ThreeBlkLogo";
 
 const NAV_LINKS: ReadonlyArray<{ readonly href: string; readonly label: string }> = [
   { href: "#services", label: "Services" },
@@ -12,8 +12,8 @@ export function Header() {
   return (
     <header className="fixed top-0 inset-x-0 z-50 bg-base/80 backdrop-blur border-b border-border-default">
       <Container className="flex h-16 items-center justify-between">
-        <a href="#hero" aria-label="Velox — home" className="flex items-center">
-          <VeloxLogo variant="primary" className="h-7 w-auto" />
+        <a href="#hero" aria-label="3BLK — home" className="flex items-center">
+          <ThreeBlkLogo variant="primary" className="h-7 w-auto" />
         </a>
         <nav aria-label="Primary" className="hidden md:block">
           <ul className="flex items-center gap-7">

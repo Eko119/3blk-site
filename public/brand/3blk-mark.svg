@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 56 56" width="56" height="56" role="img" aria-label="3BLK mark">
+  <title>3BLK mark</title>
+  <!--
+    III mark alone (Variant 02). Three vertical strokes, center 1px heavier.
+    Use in tab favicons, browser bars, and small constrained contexts.
+  -->
+  <g transform="translate(4,4)">
+    <line x1="8" y1="4" x2="8" y2="44" stroke="#C2FF3D" stroke-width="4" stroke-linecap="square"/>
+    <line x1="24" y1="4" x2="24" y2="44" stroke="#C2FF3D" stroke-width="5" stroke-linecap="square"/>
+    <line x1="40" y1="4" x2="40" y2="44" stroke="#C2FF3D" stroke-width="4" stroke-linecap="square"/>
+  </g>
+</svg>

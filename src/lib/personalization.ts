@@ -15,7 +15,7 @@ export const PERSONALIZATION_DEFAULTS: PersonalizationOutput = {
   preferredCTA: "book",
 };
 
-const RETURNING_USER_COOKIE = "velox_visited";
+const RETURNING_USER_COOKIE = "tripleblack_visited";
 
 function fnv1a32(input: string): number {
   let hash = 0x811c9dc5;

@@ -16,7 +16,7 @@ export function About() {
           <div className="flex flex-col gap-5 text-body-lg text-text-secondary">
             <p>
               I&apos;m the studio. One person, full focus, no relay between strategy and shipping.
-              Velox builds production websites in 3 weeks. The contract is simple: I do the work,
+              3BLK builds production websites in 3 weeks. The contract is simple: I do the work,
               you keep the asset, and the site converts the audience it was built for.
             </p>
             <p>
@@ -26,7 +26,7 @@ export function About() {
               A real page that loads in under 1 second and reads cleanly on a phone in a bad mood.
             </p>
             <p>
-              Velox is what&apos;s left after I removed the parts that don&apos;t move the needle.
+              3BLK is what&apos;s left after I removed the parts that don&apos;t move the needle.
               No retainers. No half-built CMS. No dead pages. If you&apos;re between agencies and
               freelancers, this is the third option. Tell me what you&apos;re trying to do.
               I&apos;ll tell you if I can help.

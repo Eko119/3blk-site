@@ -1,11 +1,11 @@
 export const SITE = {
-  name: "Velox",
-  url: "https://velox.studio",
+  name: "3BLK",
+  url: "https://3blk.studio",
   description:
-    "Velox is a solo digital studio. I ship production websites in 3 weeks — conversion-led, performance-obsessed, deterministic by design and built to last.",
+    "3BLK is a solo digital studio. I ship production websites in 3 weeks — conversion-led, performance-obsessed, deterministic by design and built to last.",
   headline: "Live in 3 weeks. Built to convert.",
   subHeadline: "A solo digital studio shipping production sites in 3 weeks, no agency timelines.",
-  contactEmail: "hello@velox.studio",
+  contactEmail: "hello@3blk.studio",
 } as const;
 
 export type Project = {

@@ -2,7 +2,7 @@ import { ArrowRight } from "lucide-react";
 import { Button } from "../primitives/Button";
 import { Container } from "../primitives/Container";
 import { Eyebrow } from "../primitives/Eyebrow";
-import { VeloxLogo } from "../brand/VeloxLogo";
+import { ThreeBlkLogo } from "../brand/ThreeBlkLogo";
 import { SITE } from "@/lib/site";
 
 export function Hero() {
@@ -14,7 +14,7 @@ export function Hero() {
     >
       <Container>
         <div className="flex flex-col gap-8 max-w-4xl">
-          <VeloxLogo variant="mark-filled" className="h-20 w-20 md:h-24 md:w-24" />
+          <ThreeBlkLogo variant="mark-filled" className="h-20 w-20 md:h-24 md:w-24" />
           <Eyebrow>Solo digital studio</Eyebrow>
           <h1
             id="hero-heading"
