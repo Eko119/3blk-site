@@ -1,71 +1,127 @@
+/* ============================================================
+   3BLK STUDIOS — DESIGN TOKENS
+   Editorial two-surface system: Ink (warm near-black) and Bone
+   (warm paper), joined by an oxblood/wine/clay accent family.
+   Every text pairing below is verified WCAG AA or better.
+   ============================================================ */
+
 :root {
-  /* ─── Brand accent ──────────────────────────────────────────── */
-  --color-brand-accent: #c2ff3d;
-  --color-brand-accent-text: #6b8a1a;
+  /* ─── Brand accent family ───────────────────────────────────
+     oxblood  — accent on Bone, and a surface carrying Bone text.
+                Never used as text on Ink (1.88:1). Fills only.
+     wine     — deepest surface, carries Bone text (12.31:1).
+     clay     — muted warm crimson; the accent voice on Ink.
+     ────────────────────────────────────────────────────────── */
+  --color-oxblood: #6e2733;
+  --color-oxblood-hover: #862f3e;
+  --color-wine: #4a1a24;
+  --color-clay: #c98d82;
+  --color-clay-hover: #d8a096;
 
   /* ─── Surfaces ──────────────────────────────────────────────── */
-  --color-bg-base: #0a0a0a;
-  --color-bg-elevated: #111111;
-  --color-bg-overlay: #181818;
-  --color-bg-inverse: #f5f5f5;
+  --color-ink: #0b0a09;
+  --color-ink-raised: #121110;
+  --color-ink-overlay: #1a1817;
+  --color-bone: #f2ede6;
+  --color-bone-sunk: #e7e0d7;
 
-  /* ─── Neutrals ──────────────────────────────────────────────── */
-  --color-neutral-0: #ffffff;
-  --color-neutral-100: #e8e8e8;
-  --color-neutral-300: #a0a0a0;
-  --color-neutral-400: #888888;
-  --color-neutral-600: #444444;
-  --color-neutral-700: #2e2e2e;
-  --color-neutral-800: #1f1f1f;
-  --color-neutral-900: #111111;
-  --color-neutral-1000: #0a0a0a;
+  --color-bg-base: var(--color-ink);
+  --color-bg-elevated: var(--color-ink-raised);
+  --color-bg-overlay: var(--color-ink-overlay);
+  --color-bg-inverse: var(--color-bone);
 
-  /* ─── Semantic (13 canonical tokens) ────────────────────────── */
-  --color-text-primary: #ffffff;
-  --color-text-secondary: #a0a0a0;
-  --color-text-tertiary: #888888;
-  --color-text-inverse: #0a0a0a;
-  --color-text-accent: #c2ff3d;
-  --color-bg-primary: #0a0a0a;
-  --color-border-default: #1f1f1f;
-  --color-border-strong: #2e2e2e;
-  --color-success: #4ade80;
-  --color-warning: #fbbf24;
-  --color-error: #f87171;
-  --color-info: #60a5fa;
-  --color-accent-on-light: #6b8a1a;
+  /* ─── Text on Ink ───────────────────────────────────────────── */
+  --color-text-primary: #f2ede6; /* 16.99:1 AAA */
+  --color-text-secondary: #a8a099; /*  7.68:1 AAA */
+  --color-text-tertiary: #8a817a; /*  5.18:1 AA  */
+  --color-text-accent: #c98d82; /*  7.17:1 AAA */
 
-  /* ─── Type scale (13 tokens, rem at 16px root) ──────────────── */
-  --text-display-1: 4.5rem;
-  --text-display-2: 3.5rem;
-  --text-h1: 2.5rem;
-  --text-h2: 2rem;
-  --text-h3: 1.5rem;
-  --text-h4: 1.25rem;
-  --text-body-lg: 1.125rem;
+  /* ─── Text on Bone ──────────────────────────────────────────── */
+  --color-text-on-bone: #0b0a09; /* 16.99:1 AAA */
+  --color-text-on-bone-secondary: #5b534c; /*  6.47:1 AA  */
+  --color-text-on-bone-tertiary: #6e655d; /*  4.90:1 AA  */
+  --color-text-on-bone-accent: #6e2733; /*  9.01:1 AAA */
+
+  --color-text-inverse: var(--color-text-on-bone);
+
+  /* ─── Rules and borders ─────────────────────────────────────── */
+  --color-border-default: #232120;
+  --color-border-strong: #37332f;
+  --color-border-on-bone: #d5cdc2;
+  --color-border-on-bone-strong: #b9afa2;
+  /* The Ink rules read as 1.15:1 against Wine — invisible. Rules
+     on that surface are a lifted tint of the surface itself. */
+  --color-border-on-wine: #6d3542;
+
+  /* ─── Status ────────────────────────────────────────────────── */
+  --color-success: #7fb08a;
+  --color-error: #d98b83;
+
+  /* ─── Editorial type scale ──────────────────────────────────
+     Fluid clamps. Display sizes drive the front page; the ratio
+     between steps widens at the top so headlines read as
+     statements rather than as large body copy.
+     ────────────────────────────────────────────────────────── */
+  /* display-1 is capped so the hero — headline, deck and both
+     calls to action — composes inside a 900px laptop viewport
+     rather than pushing the offer below the fold. */
+  --text-display-1: clamp(2.5rem, 8.4vw, 8.25rem);
+  --text-display-2: clamp(2.25rem, 6vw, 5.5rem);
+  --text-display-3: clamp(1.875rem, 4.2vw, 3.5rem);
+  --text-h1: clamp(2rem, 4vw, 3.5rem);
+  --text-h2: clamp(1.625rem, 2.9vw, 2.5rem);
+  --text-h3: clamp(1.25rem, 1.9vw, 1.625rem);
+  --text-h4: clamp(1.0625rem, 1.35vw, 1.25rem);
+  --text-body-lg: clamp(1.0625rem, 1.15vw, 1.3125rem);
   --text-body: 1rem;
-  --text-body-sm: 0.875rem;
+  --text-body-sm: 0.9375rem;
   --text-label: 0.8125rem;
+  --text-meta: 0.75rem;
   --text-overline: 0.6875rem;
-  --text-mono: 0.875rem;
-  --text-mono-sm: 0.75rem;
 
-  /* ─── Type scale (mobile overrides) ─────────────────────────── */
-  --text-display-1-mobile: 2.75rem;
-  --text-display-2-mobile: 2.25rem;
-  --text-h1-mobile: 1.75rem;
-  --text-h2-mobile: 1.5rem;
-  --text-h3-mobile: 1.25rem;
+  /* ─── Tracking ──────────────────────────────────────────────── */
+  --tracking-display: -0.035em;
+  --tracking-heading: -0.02em;
+  --tracking-body: 0;
+  --tracking-meta: 0.14em;
+  --tracking-overline: 0.18em;
 
-  /* ─── Motion ────────────────────────────────────────────────── */
-  --motion-easing-snap: cubic-bezier(0.16, 1, 0.3, 1);
-  --motion-easing-standard: cubic-bezier(0.4, 0, 0.2, 1);
-  --motion-easing-exit: cubic-bezier(0.4, 0, 1, 1);
-  --motion-easing-linear: linear;
+  /* ─── Leading ───────────────────────────────────────────────── */
+  --leading-display: 0.94;
+  --leading-heading: 1.06;
+  --leading-snug: 1.28;
+  --leading-body: 1.62;
+  --leading-relaxed: 1.75;
 
-  --motion-duration-instant: 80ms;
-  --motion-duration-fast: 150ms;
-  --motion-duration-default: 200ms;
-  --motion-duration-slow: 350ms;
-  --motion-duration-brand: 500ms;
+  /* ─── Editorial rhythm ──────────────────────────────────────
+     Section padding and gutters scale with the viewport so the
+     vertical cadence holds from 360px to 2560px.
+     ────────────────────────────────────────────────────────── */
+  --space-section: clamp(5.5rem, 13vh, 11rem);
+  --space-section-tight: clamp(3.5rem, 8vh, 6.5rem);
+  --space-block: clamp(2.5rem, 5vw, 4.5rem);
+  --space-gutter: clamp(1.5rem, 5vw, 5rem);
+  --container-max: 90rem;
+  --measure: 34rem;
+  --measure-wide: 46rem;
+
+  /* ─── Motion ────────────────────────────────────────────────
+     A single expressive curve (expo-out) carries reveals; a
+     symmetric curve carries state changes. Nothing bounces.
+     ────────────────────────────────────────────────────────── */
+  --ease-reveal: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-inout: cubic-bezier(0.65, 0, 0.35, 1);
+  --ease-out: cubic-bezier(0.33, 1, 0.68, 1);
+
+  --dur-fast: 200ms;
+  --dur-base: 400ms;
+  --dur-slow: 700ms;
+  --dur-reveal: 1100ms;
+  /* The hero is the LCP element — it gets a shorter curve. */
+  --dur-hero: 620ms;
+  /* One full pass of the marquee. Slow enough to read, not race. */
+  --dur-marquee: 48s;
+
+  --stagger: 90ms;
+  --stagger-hero: 55ms;
 }

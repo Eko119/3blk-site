@@ -1,177 +1,63 @@
-type ThreeBlkLogoProps =
-  | { variant: "primary"; className?: string; title?: string }
-  | { variant: "reversed"; className?: string; title?: string }
-  | { variant: "stacked"; className?: string; title?: string }
-  | { variant: "mark"; className?: string; title?: string }
-  | { variant: "mark-filled"; className?: string; title?: string }
-  | { variant: "wordmark"; className?: string; title?: string }
-  | { variant: "single-color"; className?: string; title?: string; color?: string };
+/* ============================================================
+   3BLK STUDIOS — IDENTITY
+   The mark is three vertical bars: triple black. It is drawn in
+   `currentColor` so a single asset serves the Ink and Bone
+   surfaces without a second file or a colour prop.
+   ============================================================ */
 
-const FONT_STACK = "var(--font-geist-sans), 'Geist Sans', system-ui, sans-serif";
+type MarkProps = {
+  readonly className?: string;
+  /** Set when the mark stands alone and must name itself. */
+  readonly title?: string;
+};
 
-export function ThreeBlkLogo(props: ThreeBlkLogoProps) {
-  const label = props.title ?? "3BLK";
+/**
+ * The bars sit on a 24-unit grid: 3 / 5 / 3 wide, split by two
+ * 5-unit voids. The centre bar is heavier so the group reads as
+ * composed rather than repeated.
+ */
+export function ThreeBlkMark({ className, title }: MarkProps) {
+  const labelled = typeof title === "string";
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 24 32"
+      className={className}
+      fill="currentColor"
+      role={labelled ? "img" : "presentation"}
+      aria-label={labelled ? title : undefined}
+      aria-hidden={labelled ? undefined : "true"}
+      focusable="false"
+    >
+      {labelled ? <title>{title}</title> : null}
+      <rect x="0" y="0" width="3" height="32" />
+      <rect x="8" y="0" width="5" height="32" />
+      <rect x="21" y="0" width="3" height="32" />
+    </svg>
+  );
+}
 
-  switch (props.variant) {
-    case "primary":
-      return (
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 0 160 56"
-          width="160"
-          height="56"
-          role="img"
-          aria-label={label}
-          className={props.className}
-        >
-          <title>{label}</title>
-          <g transform="translate(4,4)">
-            <line x1="8" y1="4" x2="8" y2="44" stroke="#C2FF3D" strokeWidth="4" strokeLinecap="square" />
-            <line x1="24" y1="4" x2="24" y2="44" stroke="#C2FF3D" strokeWidth="5" strokeLinecap="square" />
-            <line x1="40" y1="4" x2="40" y2="44" stroke="#C2FF3D" strokeWidth="4" strokeLinecap="square" />
-          </g>
-          <text x="67" y="40" fontFamily={FONT_STACK} fontWeight="700" fontSize="28" fill="#FFFFFF" letterSpacing="-1.12">
-            3BLK
-          </text>
-        </svg>
-      );
+type LockupProps = {
+  readonly className?: string;
+};
 
-    case "reversed":
-      return (
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 0 160 56"
-          width="160"
-          height="56"
-          role="img"
-          aria-label={label}
-          className={props.className}
-        >
-          <title>{label}</title>
-          <g transform="translate(4,4)">
-            <line x1="8" y1="4" x2="8" y2="44" stroke="#111111" strokeWidth="4" strokeLinecap="square" />
-            <line x1="24" y1="4" x2="24" y2="44" stroke="#111111" strokeWidth="5" strokeLinecap="square" />
-            <line x1="40" y1="4" x2="40" y2="44" stroke="#111111" strokeWidth="4" strokeLinecap="square" />
-          </g>
-          <text x="67" y="40" fontFamily={FONT_STACK} fontWeight="700" fontSize="28" fill="#111111" letterSpacing="-1.12">
-            3BLK
-          </text>
-        </svg>
-      );
-
-    case "stacked":
-      return (
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 0 120 88"
-          width="120"
-          height="88"
-          role="img"
-          aria-label={label}
-          className={props.className}
-        >
-          <title>{label}</title>
-          <g transform="translate(36,4)">
-            <line x1="8" y1="4" x2="8" y2="44" stroke="#C2FF3D" strokeWidth="4" strokeLinecap="square" />
-            <line x1="24" y1="4" x2="24" y2="44" stroke="#C2FF3D" strokeWidth="5" strokeLinecap="square" />
-            <line x1="40" y1="4" x2="40" y2="44" stroke="#C2FF3D" strokeWidth="4" strokeLinecap="square" />
-          </g>
-          <text
-            x="60"
-            y="82"
-            textAnchor="middle"
-            fontFamily={FONT_STACK}
-            fontWeight="700"
-            fontSize="22"
-            fill="#FFFFFF"
-            letterSpacing="-0.88"
-          >
-            3BLK
-          </text>
-        </svg>
-      );
-
-    case "mark":
-      return (
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 0 56 56"
-          width="56"
-          height="56"
-          role="img"
-          aria-label={props.title ?? "3BLK mark"}
-          className={props.className}
-        >
-          <title>{props.title ?? "3BLK mark"}</title>
-          <g transform="translate(4,4)">
-            <line x1="8" y1="4" x2="8" y2="44" stroke="#C2FF3D" strokeWidth="4" strokeLinecap="square" />
-            <line x1="24" y1="4" x2="24" y2="44" stroke="#C2FF3D" strokeWidth="5" strokeLinecap="square" />
-            <line x1="40" y1="4" x2="40" y2="44" stroke="#C2FF3D" strokeWidth="4" strokeLinecap="square" />
-          </g>
-        </svg>
-      );
-
-    case "mark-filled":
-      return (
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 0 56 56"
-          width="56"
-          height="56"
-          role="img"
-          aria-label={props.title ?? "3BLK mark"}
-          className={props.className}
-        >
-          <title>{props.title ?? "3BLK mark"}</title>
-          <g transform="translate(4,4)">
-            <rect x="4" y="4" width="8" height="40" fill="#C2FF3D" />
-            <rect x="19" y="4" width="10" height="40" fill="#C2FF3D" />
-            <rect x="36" y="4" width="8" height="40" fill="#C2FF3D" />
-          </g>
-        </svg>
-      );
-
-    case "wordmark":
-      return (
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 0 120 40"
-          width="120"
-          height="40"
-          role="img"
-          aria-label={label}
-          className={props.className}
-        >
-          <title>{label}</title>
-          <text x="0" y="30" fontFamily={FONT_STACK} fontWeight="700" fontSize="28" fill="#FFFFFF" letterSpacing="-1.12">
-            3BLK
-          </text>
-        </svg>
-      );
-
-    case "single-color": {
-      const fill = props.color ?? "#FFFFFF";
-      return (
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 0 160 56"
-          width="160"
-          height="56"
-          role="img"
-          aria-label={label}
-          className={props.className}
-        >
-          <title>{label}</title>
-          <g transform="translate(4,4)">
-            <line x1="8" y1="4" x2="8" y2="44" stroke={fill} strokeWidth="4" strokeLinecap="square" />
-            <line x1="24" y1="4" x2="24" y2="44" stroke={fill} strokeWidth="5" strokeLinecap="square" />
-            <line x1="40" y1="4" x2="40" y2="44" stroke={fill} strokeWidth="4" strokeLinecap="square" />
-          </g>
-          <text x="67" y="40" fontFamily={FONT_STACK} fontWeight="700" fontSize="28" fill={fill} letterSpacing="-1.12">
-            3BLK
-          </text>
-        </svg>
-      );
-    }
-  }
+/**
+ * Mark plus wordmark. The wordmark is real text rather than
+ * outlines, so it renders in the live display face, scales with
+ * the type system and stays selectable and searchable.
+ */
+export function ThreeBlkLockup({ className = "" }: LockupProps) {
+  return (
+    <span className={`inline-flex items-center gap-2.5 ${className}`.trim()}>
+      <ThreeBlkMark className="h-[1.15em] w-auto shrink-0" />
+      <span className="flex items-baseline gap-[0.3em] leading-none">
+        <span className="font-display text-[1.35em] leading-none tracking-[-0.02em]">
+          3BLK
+        </span>
+        <span className="font-mono text-[0.5em] uppercase tracking-[0.2em]">
+          Studios
+        </span>
+      </span>
+    </span>
+  );
 }

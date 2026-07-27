@@ -1,1 +1,8 @@
 * text=auto eol=lf
+
+# Fonts are binary. Git's auto-detection normally gets this right, but an
+# explicit rule means a checkout on a platform with different line endings
+# can never rewrite bytes inside a woff2 and corrupt the face.
+*.woff2 binary
+*.woff  binary
+*.ico   binary

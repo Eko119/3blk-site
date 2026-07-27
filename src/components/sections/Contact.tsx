@@ -1,91 +1,121 @@
 import { Container } from "../primitives/Container";
-import { SectionHeading } from "../primitives/SectionHeading";
+import { Eyebrow } from "../primitives/Eyebrow";
+import { MaskText } from "../primitives/MaskText";
+import { Reveal } from "../primitives/Reveal";
+import { Button } from "../primitives/Button";
+import { ContactStatus } from "./ContactStatus";
+import { CONTACT, SITE } from "@/lib/site";
+
+const FIELD =
+  "w-full border-b border-rule-strong bg-transparent pb-3 pt-2 text-body-lg text-text-primary transition-colors duration-base ease-inout placeholder:text-text-tertiary hover:border-clay focus:border-clay focus:outline-none focus-visible:outline-none";
+
+const LABEL = "font-mono text-overline uppercase text-text-tertiary";
 
 export function Contact() {
   return (
     <section
       id="contact"
       aria-labelledby="contact-heading"
-      className="py-20 md:py-32 border-t border-border-default"
+      className="border-t border-rule py-section"
     >
       <Container>
-        <div className="flex flex-col gap-10 max-w-2xl">
-          <SectionHeading
-            id="contact-heading"
-            eyebrow="Get in touch"
-            description="Tell me what you're trying to ship. If I can help, I'll say so. If I can't, I'll point you somewhere that can."
-          >
-            Start a conversation.
-          </SectionHeading>
-          <form
-            action="/api/contact"
-            method="POST"
-            className="flex flex-col gap-5"
-          >
-            <div className="flex flex-col gap-2">
-              <label htmlFor="contact-name" className="text-label text-text-secondary">
-                Name
-              </label>
-              <input
-                id="contact-name"
-                name="name"
-                type="text"
-                required
-                autoComplete="name"
-                className="bg-elevated border border-border-default rounded-md px-4 py-3 text-body text-text-primary placeholder:text-text-tertiary focus:border-accent focus:outline-none"
+        <div className="grid grid-cols-12 gap-x-gutter gap-y-section-tight">
+          <div className="col-span-12 flex flex-col gap-block lg:col-span-5">
+            <Reveal>
+              <Eyebrow>Start here</Eyebrow>
+            </Reveal>
+
+            <Reveal delay={1}>
+              <MaskText
+                as="h2"
+                id="contact-heading"
+                lines={CONTACT.heading}
+                className="font-display text-display-2 text-text-primary"
               />
-            </div>
-            <div className="flex flex-col gap-2">
-              <label htmlFor="contact-email" className="text-label text-text-secondary">
-                Email
-              </label>
-              <input
-                id="contact-email"
-                name="email"
-                type="email"
-                required
-                autoComplete="email"
-                className="bg-elevated border border-border-default rounded-md px-4 py-3 text-body text-text-primary placeholder:text-text-tertiary focus:border-accent focus:outline-none"
-              />
-            </div>
-            <div className="flex flex-col gap-2">
-              <label htmlFor="contact-message" className="text-label text-text-secondary">
-                Message
-              </label>
-              <textarea
-                id="contact-message"
-                name="message"
-                required
-                rows={5}
-                className="bg-elevated border border-border-default rounded-md px-4 py-3 text-body text-text-primary placeholder:text-text-tertiary focus:border-accent focus:outline-none resize-y"
-              />
-            </div>
-            <div
-              aria-hidden="true"
-              style={{
-                position: "absolute",
-                left: "-9999px",
-                width: "1px",
-                height: "1px",
-                overflow: "hidden",
-              }}
-            >
-              <label htmlFor="contact-company">Company (leave blank)</label>
-              <input
-                id="contact-company"
-                name="company"
-                type="text"
-                tabIndex={-1}
-                autoComplete="off"
-              />
-            </div>
-            <button
-              type="submit"
-              className="self-start inline-flex items-center justify-center gap-2 rounded-md bg-accent px-5 py-3 text-label font-medium text-text-inverse hover:bg-accent/90 transition-colors duration-default ease-standard"
-            >
-              Send message
-            </button>
-          </form>
+            </Reveal>
+
+            <Reveal delay={2}>
+              <p className="max-w-measure text-body-lg text-text-secondary">
+                {CONTACT.standfirst}
+              </p>
+            </Reveal>
+
+            <Reveal delay={3} className="flex flex-col gap-2 border-t border-rule pt-6">
+              <a
+                href={`mailto:${SITE.contactEmail}`}
+                className="link-rule self-start font-display text-h2 text-text-primary transition-colors duration-base ease-inout hover:text-clay"
+              >
+                {SITE.contactEmail}
+              </a>
+              <span className="font-mono text-overline uppercase text-text-tertiary">
+                {CONTACT.responseNote}
+              </span>
+            </Reveal>
+          </div>
+
+          <Reveal delay={1} className="col-span-12 lg:col-span-6 lg:col-start-7">
+            <form action="/api/contact" method="POST" className="flex flex-col gap-block">
+              <div className="flex flex-col gap-2">
+                <label htmlFor="contact-name" className={LABEL}>
+                  Your name
+                </label>
+                <input
+                  id="contact-name"
+                  name="name"
+                  type="text"
+                  required
+                  autoComplete="name"
+                  className={FIELD}
+                />
+              </div>
+
+              <div className="flex flex-col gap-2">
+                <label htmlFor="contact-email" className={LABEL}>
+                  Email
+                </label>
+                <input
+                  id="contact-email"
+                  name="email"
+                  type="email"
+                  required
+                  autoComplete="email"
+                  className={FIELD}
+                />
+              </div>
+
+              <div className="flex flex-col gap-2">
+                <label htmlFor="contact-message" className={LABEL}>
+                  What are you building?
+                </label>
+                <textarea
+                  id="contact-message"
+                  name="message"
+                  required
+                  rows={4}
+                  className={`${FIELD} resize-y`}
+                />
+              </div>
+
+              {/* Honeypot — hidden from people, tempting to bots. */}
+              <div className="absolute -left-[9999px] h-px w-px overflow-hidden" aria-hidden="true">
+                <label htmlFor="contact-company">Company (leave blank)</label>
+                <input
+                  id="contact-company"
+                  name="company"
+                  type="text"
+                  tabIndex={-1}
+                  autoComplete="off"
+                />
+              </div>
+
+              <div className="flex flex-col gap-5">
+                <Button type="submit" variant="solid" className="self-start">
+                  Send it over
+                </Button>
+                <ContactStatus />
+              </div>
+            </form>
+          </Reveal>
         </div>
       </Container>
     </section>

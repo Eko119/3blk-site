@@ -1,9 +1,15 @@
 import { ImageResponse } from "next/og";
+import { PROMISE, SITE } from "@/lib/site";
 
-export const alt = "3BLK — Live in 3 weeks. Built to convert.";
+export const alt = `${SITE.name} — ${PROMISE.short}`;
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
+/**
+ * Share card. Set in the fallback serif rather than the display
+ * face — next/og rasterises at build time and loading a font here
+ * would put a network fetch inside the build.
+ */
 export default function OpengraphImage() {
   return new ImageResponse(
     (
@@ -11,35 +17,61 @@ export default function OpengraphImage() {
         style={{
           width: "100%",
           height: "100%",
-          background: "#0A0A0A",
+          background: "#0B0A09",
           display: "flex",
           flexDirection: "column",
-          alignItems: "flex-start",
-          justifyContent: "center",
-          padding: "96px",
-          gap: "48px",
+          justifyContent: "space-between",
+          padding: "80px",
         }}
       >
-        <svg width="160" height="160" viewBox="0 0 56 56" xmlns="http://www.w3.org/2000/svg">
-          <g transform="translate(4,4)">
-            <rect x="4" y="4" width="8" height="40" fill="#C2FF3D" />
-            <rect x="19" y="4" width="10" height="40" fill="#C2FF3D" />
-            <rect x="36" y="4" width="8" height="40" fill="#C2FF3D" />
-          </g>
-        </svg>
+        <div style={{ display: "flex", alignItems: "center", gap: 18 }}>
+          <div style={{ display: "flex", gap: 6 }}>
+            <div style={{ width: 8, height: 52, background: "#C98D82" }} />
+            <div style={{ width: 13, height: 52, background: "#C98D82" }} />
+            <div style={{ width: 8, height: 52, background: "#C98D82" }} />
+          </div>
+          <div
+            style={{
+              display: "flex",
+              fontSize: 30,
+              letterSpacing: "0.22em",
+              textTransform: "uppercase",
+              color: "#A8A099",
+            }}
+          >
+            3BLK Studios
+          </div>
+        </div>
+
         <div
           style={{
             display: "flex",
             flexDirection: "column",
-            color: "#FFFFFF",
-            fontSize: 88,
-            fontWeight: 700,
+            color: "#F2EDE6",
+            fontSize: 86,
+            fontFamily: "Georgia, serif",
+            lineHeight: 1.06,
             letterSpacing: "-0.03em",
-            lineHeight: 1.05,
           }}
         >
-          <span>Live in 3 weeks.</span>
-          <span>Built to convert.</span>
+          <span>We build the site first.</span>
+          <span>You pay only if you love it.</span>
+        </div>
+
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "space-between",
+            borderTop: "1px solid #232120",
+            paddingTop: 28,
+            fontSize: 24,
+            letterSpacing: "0.18em",
+            textTransform: "uppercase",
+            color: "#8A817A",
+          }}
+        >
+          <span>No deposit &middot; No obligation</span>
+          <span>3blk.studio</span>
         </div>
       </div>
     ),

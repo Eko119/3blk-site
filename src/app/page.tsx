@@ -1,8 +1,12 @@
 import { Hero } from "@/components/sections/Hero";
-import { Services } from "@/components/sections/Services";
+import { Process } from "@/components/sections/Process";
 import { Work } from "@/components/sections/Work";
-import { About } from "@/components/sections/About";
+import { Capabilities } from "@/components/sections/Capabilities";
+import { Studio } from "@/components/sections/Studio";
+import { Faq } from "@/components/sections/Faq";
 import { Contact } from "@/components/sections/Contact";
+import { Marquee } from "@/components/primitives/Marquee";
+import { MARQUEE_PHRASES } from "@/lib/site";
 
 export const dynamic = "force-static";
 
@@ -10,9 +14,12 @@ export default function Home() {
   return (
     <>
       <Hero />
-      <Services />
+      <Marquee phrases={MARQUEE_PHRASES} />
+      <Process />
       <Work />
-      <About />
+      <Capabilities />
+      <Studio />
+      <Faq />
       <Contact />
     </>
   );

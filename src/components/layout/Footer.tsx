@@ -1,31 +1,78 @@
 import { Container } from "../primitives/Container";
-import { ThreeBlkLogo } from "../brand/ThreeBlkLogo";
-import { SITE } from "@/lib/site";
+import { ThreeBlkMark } from "../brand/ThreeBlkLogo";
+import { MaskText } from "../primitives/MaskText";
+import { Reveal } from "../primitives/Reveal";
+import { NAV_LINKS, PROMISE, SITE } from "@/lib/site";
 
 export function Footer() {
   const year = new Date().getFullYear();
+
   return (
-    <footer className="border-t border-border-default py-12 md:py-16">
-      <Container className="flex flex-col gap-8 md:flex-row md:items-center md:justify-between">
-        <div className="flex items-center gap-4">
-          <ThreeBlkLogo variant="mark-filled" className="h-8 w-8" />
-          <div className="flex flex-col">
-            <span className="text-label text-text-primary">{SITE.name}</span>
-            <span className="text-body-sm text-text-tertiary">
-              {SITE.subHeadline}
-            </span>
+    <footer className="border-t border-rule bg-ink pt-section">
+      <Container className="flex flex-col gap-section-tight">
+        <Reveal>
+          <MaskText
+            as="p"
+            lines={[PROMISE.short]}
+            className="font-display text-display-3 text-text-primary"
+          />
+        </Reveal>
+
+        <div className="grid grid-cols-12 gap-x-gutter gap-y-block border-t border-rule pt-block">
+          <div className="col-span-12 flex flex-col gap-5 sm:col-span-6 lg:col-span-4">
+            <ThreeBlkMark className="h-10 w-auto text-oxblood" title={`${SITE.name} mark`} />
+            <p className="max-w-measure text-body-sm text-text-secondary">
+              {SITE.description}
+            </p>
+          </div>
+
+          <nav aria-label="Footer" className="col-span-6 sm:col-span-3 lg:col-span-3 lg:col-start-7">
+            <h2 className="mb-5 font-mono text-overline uppercase text-text-tertiary">
+              Index
+            </h2>
+            <ul className="flex flex-col gap-3">
+              {NAV_LINKS.map((link) => (
+                <li key={link.href}>
+                  <a
+                    href={link.href}
+                    className="link-rule text-body-sm text-text-secondary transition-colors duration-base ease-inout hover:text-text-primary"
+                  >
+                    {link.label}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </nav>
+
+          <div className="col-span-6 sm:col-span-3 lg:col-span-3 lg:col-start-10">
+            <h2 className="mb-5 font-mono text-overline uppercase text-text-tertiary">
+              Studio
+            </h2>
+            <ul className="flex flex-col gap-3 text-body-sm text-text-secondary">
+              <li>
+                <a
+                  href={`mailto:${SITE.contactEmail}`}
+                  className="link-rule transition-colors duration-base ease-inout hover:text-text-primary"
+                >
+                  {SITE.contactEmail}
+                </a>
+              </li>
+              <li>{SITE.location}</li>
+              <li className="text-text-tertiary">{SITE.tagline}</li>
+            </ul>
           </div>
         </div>
-        <div className="flex flex-col items-start gap-1 md:items-end">
-          <a
-            href={`mailto:${SITE.contactEmail}`}
-            className="text-body-sm text-text-secondary hover:text-text-primary transition-colors"
-          >
-            {SITE.contactEmail}
-          </a>
-          <span className="text-body-sm text-text-tertiary">
-            © {year} {SITE.name}
+
+        <div className="flex flex-wrap items-center justify-between gap-4 border-t border-rule py-8 font-mono text-overline uppercase text-text-tertiary">
+          <span>
+            &copy; {year} {SITE.name}
           </span>
+          <a
+            href="#hero"
+            className="link-rule transition-colors duration-base ease-inout hover:text-text-primary"
+          >
+            Back to top
+          </a>
         </div>
       </Container>
     </footer>

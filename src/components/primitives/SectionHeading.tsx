@@ -1,23 +1,54 @@
 import type { ReactNode } from "react";
 import { Eyebrow } from "./Eyebrow";
+import { MaskText } from "./MaskText";
+import { Reveal } from "./Reveal";
 
 type SectionHeadingProps = {
   readonly id: string;
   readonly eyebrow: string;
-  readonly children: ReactNode;
-  readonly description?: ReactNode;
+  /** One entry per display line. */
+  readonly lines: readonly string[];
+  readonly standfirst?: ReactNode;
+  readonly onBone?: boolean;
+  readonly className?: string;
 };
 
-export function SectionHeading({ id, eyebrow, children, description }: SectionHeadingProps) {
+export function SectionHeading({
+  id,
+  eyebrow,
+  lines,
+  standfirst,
+  onBone = false,
+  className = "",
+}: SectionHeadingProps) {
   return (
-    <header className="flex flex-col gap-4 max-w-3xl">
-      <Eyebrow>{eyebrow}</Eyebrow>
-      <h2 id={id} className="text-h2 md:text-h1 text-text-primary">
-        {children}
-      </h2>
-      {description ? (
-        <p className="text-body-lg text-text-secondary">{description}</p>
+    <div className={`flex flex-col gap-block ${className}`.trim()}>
+      <Reveal>
+        <Eyebrow onBone={onBone}>{eyebrow}</Eyebrow>
+      </Reveal>
+
+      <Reveal delay={1}>
+        <MaskText
+          as="h2"
+          id={id}
+          lines={lines}
+          className={`font-display text-display-3 ${
+            onBone ? "text-on-bone" : "text-text-primary"
+          }`}
+        />
+      </Reveal>
+
+      {standfirst ? (
+        <Reveal delay={2}>
+          <p
+            className={`max-w-measure-wide text-body-lg ${
+              onBone ? "text-on-bone-secondary" : "text-text-secondary"
+            }`}
+          >
+            {standfirst}
+          </p>
+        </Reveal>
       ) : null}
-    </header>
+    </div>
   );
 }
