@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { CAPABILITIES, PROMISE, SITE } from "./site";
+import { CAPABILITIES, CHANNELS, PROMISE, SITE } from "./site";
 
 export function buildMetadata(): Metadata {
   const title = `${SITE.name} — ${PROMISE.short}`;
@@ -57,6 +57,9 @@ export function buildJsonLd(): string {
       email: SITE.contactEmail,
       slogan: PROMISE.short,
       areaServed: "Worldwide",
+      sameAs: CHANNELS.filter((channel) => channel.href.startsWith("https://")).map(
+        (channel) => channel.href,
+      ),
       knowsAbout: CAPABILITIES.map((capability) => capability.title),
       makesOffer: {
         "@type": "Offer",

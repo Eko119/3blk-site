@@ -12,9 +12,32 @@ export const SITE = {
   description:
     "3BLK Studios is a design-led web studio. We design and build your site before you pay for it — you only commission the work once you have seen it finished.",
   tagline: "Built before billed.",
-  contactEmail: "studio@3blk.studio",
+  contactEmail: "1095cult@proton.me",
   location: "Remote — working worldwide",
 } as const;
+
+/** Where enquiries can reach the studio, in the order we prefer them. */
+export type Channel = {
+  readonly id: string;
+  readonly label: string;
+  readonly value: string;
+  readonly href: string;
+};
+
+export const CHANNELS: readonly Channel[] = [
+  {
+    id: "email",
+    label: "Email",
+    value: SITE.contactEmail,
+    href: `mailto:${SITE.contactEmail}`,
+  },
+  {
+    id: "instagram",
+    label: "Instagram",
+    value: "@3blk",
+    href: "https://instagram.com/3blk",
+  },
+] as const;
 
 /** The promise, expressed three ways for three contexts. */
 export const PROMISE = {

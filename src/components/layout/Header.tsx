@@ -9,7 +9,7 @@ import {
 } from "react";
 import { Container } from "../primitives/Container";
 import { ThreeBlkLockup } from "../brand/ThreeBlkLogo";
-import { NAV_LINKS, SITE } from "@/lib/site";
+import { CHANNELS, NAV_LINKS, SITE } from "@/lib/site";
 
 /** Vertical midpoint of the 5rem bar — the line we test sections against. */
 const HEADER_MID = 40;
@@ -242,13 +242,19 @@ export function Header() {
             </ul>
           </Container>
 
-          <Container className="flex flex-col gap-2 pt-block">
-            <a
-              href={`mailto:${SITE.contactEmail}`}
-              className="link-rule self-start font-display text-h2 text-text-primary"
-            >
-              {SITE.contactEmail}
-            </a>
+          <Container className="flex flex-col gap-3 pt-block">
+            {CHANNELS.map((channel) => (
+              <a
+                key={channel.id}
+                href={channel.href}
+                {...(channel.id === "instagram"
+                  ? { target: "_blank", rel: "noreferrer noopener" }
+                  : {})}
+                className="link-rule self-start font-display text-h2 text-text-primary"
+              >
+                {channel.value}
+              </a>
+            ))}
             <span className="font-mono text-overline uppercase text-text-tertiary">
               {SITE.location}
             </span>

@@ -4,7 +4,7 @@ import { MaskText } from "../primitives/MaskText";
 import { Reveal } from "../primitives/Reveal";
 import { Button } from "../primitives/Button";
 import { ContactStatus } from "./ContactStatus";
-import { CONTACT, SITE } from "@/lib/site";
+import { CHANNELS, CONTACT } from "@/lib/site";
 
 const FIELD =
   "w-full border-b border-rule-strong bg-transparent pb-3 pt-2 text-body-lg text-text-primary transition-colors duration-base ease-inout placeholder:text-text-tertiary hover:border-clay focus:border-clay focus:outline-none focus-visible:outline-none";
@@ -40,13 +40,25 @@ export function Contact() {
               </p>
             </Reveal>
 
-            <Reveal delay={3} className="flex flex-col gap-2 border-t border-rule pt-6">
-              <a
-                href={`mailto:${SITE.contactEmail}`}
-                className="link-rule self-start font-display text-h2 text-text-primary transition-colors duration-base ease-inout hover:text-clay"
-              >
-                {SITE.contactEmail}
-              </a>
+            <Reveal delay={3} className="flex flex-col gap-5 border-t border-rule pt-6">
+              <ul className="flex flex-col gap-3">
+                {CHANNELS.map((channel) => (
+                  <li key={channel.id} className="flex flex-col gap-1">
+                    <span className="font-mono text-overline uppercase text-text-tertiary">
+                      {channel.label}
+                    </span>
+                    <a
+                      href={channel.href}
+                      {...(channel.id === "instagram"
+                        ? { target: "_blank", rel: "noreferrer noopener" }
+                        : {})}
+                      className="link-rule self-start font-display text-h2 text-text-primary transition-colors duration-base ease-inout hover:text-clay"
+                    >
+                      {channel.value}
+                    </a>
+                  </li>
+                ))}
+              </ul>
               <span className="font-mono text-overline uppercase text-text-tertiary">
                 {CONTACT.responseNote}
               </span>

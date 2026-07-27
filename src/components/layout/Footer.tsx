@@ -2,7 +2,7 @@ import { Container } from "../primitives/Container";
 import { ThreeBlkMark } from "../brand/ThreeBlkLogo";
 import { MaskText } from "../primitives/MaskText";
 import { Reveal } from "../primitives/Reveal";
-import { NAV_LINKS, PROMISE, SITE } from "@/lib/site";
+import { CHANNELS, NAV_LINKS, PROMISE, SITE } from "@/lib/site";
 
 export function Footer() {
   const year = new Date().getFullYear();
@@ -49,14 +49,19 @@ export function Footer() {
               Studio
             </h2>
             <ul className="flex flex-col gap-3 text-body-sm text-text-secondary">
-              <li>
-                <a
-                  href={`mailto:${SITE.contactEmail}`}
-                  className="link-rule transition-colors duration-base ease-inout hover:text-text-primary"
-                >
-                  {SITE.contactEmail}
-                </a>
-              </li>
+              {CHANNELS.map((channel) => (
+                <li key={channel.id}>
+                  <a
+                    href={channel.href}
+                    {...(channel.id === "instagram"
+                      ? { target: "_blank", rel: "noreferrer noopener" }
+                      : {})}
+                    className="link-rule transition-colors duration-base ease-inout hover:text-text-primary"
+                  >
+                    {channel.value}
+                  </a>
+                </li>
+              ))}
               <li>{SITE.location}</li>
               <li className="text-text-tertiary">{SITE.tagline}</li>
             </ul>
