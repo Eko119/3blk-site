@@ -71,7 +71,7 @@ export default function OpengraphImage() {
           }}
         >
           <span>No deposit &middot; No obligation</span>
-          <span>3blk.studio</span>
+          <span>3blk.com</span>
         </div>
       </div>
     ),

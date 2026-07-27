@@ -8,7 +8,7 @@
 export const SITE = {
   name: "3BLK Studios",
   shortName: "3BLK",
-  url: "https://3blk.studio",
+  url: "https://3blk.com",
   description:
     "3BLK Studios is a design-led web studio. We design and build your site before you pay for it — you only commission the work once you have seen it finished.",
   tagline: "Built before billed.",
