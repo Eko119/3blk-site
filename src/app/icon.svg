@@ -1,14 +1,14 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 56 56" width="56" height="56" role="img" aria-label="3BLK mark">
-  <title>3BLK mark</title>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="32" height="32" role="img" aria-label="3BLK Studios">
+  <title>3BLK Studios</title>
   <!--
-    Filled III mark (Variant 03). Three solid lime rectangles,
-    center 2px wider. Primary use: favicon, app icon, social avatar,
-    embroidery. Maximum legibility at minimum size. Solid form
-    survives 16px. Transparent background. Use on #0A0A0A surface.
+    Triple-bar mark on Ink. Bars are 3/5/3 units wide on a 24-unit
+    measure, inset into a 32-unit square. Solid forms survive 16px,
+    which is the only size that really matters here.
   -->
-  <g transform="translate(4,4)">
-    <rect x="4" y="4" width="8" height="40" fill="#C2FF3D"/>
-    <rect x="19" y="4" width="10" height="40" fill="#C2FF3D"/>
-    <rect x="36" y="4" width="8" height="40" fill="#C2FF3D"/>
+  <rect width="32" height="32" fill="#0B0A09"/>
+  <g fill="#C98D82">
+    <rect x="4" y="5" width="3" height="22"/>
+    <rect x="12" y="5" width="5" height="22"/>
+    <rect x="25" y="5" width="3" height="22"/>
   </g>
 </svg>

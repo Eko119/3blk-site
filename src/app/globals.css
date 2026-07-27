@@ -2,35 +2,340 @@
 @tailwind components;
 @tailwind utilities;
 
+/* ============================================================
+   BASE
+   ============================================================ */
+
 @layer base {
   html {
-    background-color: var(--color-bg-base);
+    background-color: var(--color-ink);
     color-scheme: dark;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  /* The custom cursor replaces the pointer only where a real
+     pointing device exists and the visitor has not asked for
+     reduced motion. Everywhere else the native cursor stays. */
+  html[data-cursor="on"],
+  html[data-cursor="on"] a,
+  html[data-cursor="on"] button,
+  html[data-cursor="on"] label,
+  html[data-cursor="on"] input,
+  html[data-cursor="on"] textarea,
+  html[data-cursor="on"] summary {
+    cursor: none;
   }
 
   body {
+    background-color: var(--color-ink);
     color: var(--color-text-primary);
-    background-color: var(--color-bg-base);
-    font-family: var(--font-geist-sans), system-ui, -apple-system,
-      BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    font-family: var(--font-geist-sans), system-ui, -apple-system, "Segoe UI",
+      sans-serif;
     font-size: var(--text-body);
-    line-height: 1.6;
+    line-height: var(--leading-body);
+    font-feature-settings: "kern" 1;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-rendering: optimizeLegibility;
+    overflow-x: hidden;
+  }
+
+  /* Instrument Serif carries no true italic caps at display size;
+     optical sizing keeps the thin strokes from disappearing. */
+  .font-display {
+    font-synthesis-weight: none;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
   }
 
   :focus-visible {
-    outline: 2px solid var(--color-brand-accent);
-    outline-offset: 2px;
-    border-radius: 2px;
+    outline: 2px solid var(--color-clay);
+    outline-offset: 3px;
+    border-radius: 1px;
+  }
+
+  /* Bone surfaces need the darker focus ring to stay visible. */
+  .on-bone :focus-visible {
+    outline-color: var(--color-oxblood);
   }
 
   ::selection {
-    background-color: var(--color-brand-accent);
-    color: var(--color-text-inverse);
+    background-color: var(--color-oxblood);
+    color: var(--color-bone);
+  }
+
+  .on-bone ::selection {
+    background-color: var(--color-oxblood);
+    color: var(--color-bone);
   }
 }
+
+/* ============================================================
+   MOTION — reveals
+   Blocks and headline lines rise into place behind a mask. The
+   hidden state is applied only once JS has confirmed it can
+   remove it again, so a failed script leaves content readable.
+   ============================================================ */
+
+@layer components {
+  [data-js] .reveal {
+    opacity: 0;
+    transform: translate3d(0, 1.75rem, 0);
+    transition:
+      opacity var(--dur-reveal) var(--ease-reveal),
+      transform var(--dur-reveal) var(--ease-reveal);
+    transition-delay: calc(var(--reveal-delay, 0) * var(--stagger));
+    will-change: opacity, transform;
+  }
+
+  [data-js] .reveal[data-revealed="true"] {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+    will-change: auto;
+  }
+
+  /* Line mask. The wrapper clips; the inner span travels. Extra
+     padding keeps serif descenders from being sheared off. */
+  .mask-line {
+    display: block;
+    overflow: hidden;
+    padding-bottom: 0.14em;
+    margin-bottom: -0.14em;
+  }
+
+  .mask-line > span {
+    display: block;
+  }
+
+  [data-js] .mask-line > span {
+    transform: translate3d(0, 105%, 0);
+    transition: transform var(--dur-reveal) var(--ease-reveal);
+    transition-delay: calc(var(--reveal-delay, 0) * var(--stagger));
+    will-change: transform;
+  }
+
+  [data-js] .reveal[data-revealed="true"] .mask-line > span,
+  [data-js] .mask-line[data-revealed="true"] > span {
+    transform: translate3d(0, 0, 0);
+    will-change: auto;
+  }
+
+  /* The hero plays on load rather than on scroll — no observer,
+     no JS gate, so the largest text paints on the first frame of
+     its animation instead of waiting for hydration.
+     It also runs faster and tighter than the scroll reveals: this
+     is the Largest Contentful Paint, and every millisecond the
+     mask holds it back is a millisecond on the metric. */
+  .hero-line > span {
+    animation: rise var(--dur-hero) var(--ease-reveal) both;
+    animation-delay: calc(var(--reveal-delay, 0) * var(--stagger-hero));
+  }
+
+  .hero-fade {
+    animation: fade-up var(--dur-hero) var(--ease-reveal) both;
+    animation-delay: calc(var(--reveal-delay, 0) * var(--stagger-hero));
+  }
+
+  /* Below the desktop breakpoint the headline is not masked in.
+     A masked line is invisible until it has travelled, and on a
+     throttled phone that wait is precisely what Largest
+     Contentful Paint measures. The promise is the reason anyone
+     is here — it should be readable on the first frame, and the
+     flourish can belong to the screens that can afford it. */
+  @media (max-width: 1023px) {
+    /* The whole first screen arrives already composed on phones.
+       Every element here starts invisible, and on a throttled
+       connection whichever one is largest becomes the Largest
+       Contentful Paint — so the entrance was being measured as
+       load time. The promise is the reason anyone is here; it
+       should be readable on the first frame. Motion resumes at
+       the first scroll.
+
+       The [data-js] prefix is required: without it this loses on
+       specificity to the masked start state above and the
+       headline never travels back into view at all. */
+    [data-js] .hero-line > span,
+    .hero-line > span,
+    .hero-fade {
+      animation: none;
+      transform: none;
+      opacity: 1;
+    }
+  }
+
+  /* A hairline that draws itself across the section. */
+  .rule-draw {
+    transform-origin: left center;
+  }
+
+  [data-js] .rule-draw {
+    transform: scaleX(0);
+    transition: transform var(--dur-reveal) var(--ease-inout);
+    transition-delay: calc(var(--reveal-delay, 0) * var(--stagger));
+  }
+
+  [data-js] .rule-draw[data-revealed="true"] {
+    transform: scaleX(1);
+  }
+}
+
+@keyframes rise {
+  from {
+    transform: translate3d(0, 105%, 0);
+  }
+  to {
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 1.25rem, 0);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes marquee-track {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+/* ============================================================
+   MOTION — components
+   ============================================================ */
+
+@layer components {
+  .marquee-track {
+    animation: marquee-track var(--dur-marquee) linear infinite;
+  }
+
+  .marquee:hover .marquee-track,
+  .marquee:focus-within .marquee-track {
+    animation-play-state: paused;
+  }
+
+  /* Editorial link: the rule wipes out from the left on hover
+     rather than simply appearing. */
+  .link-rule {
+    position: relative;
+    display: inline-block;
+  }
+
+  .link-rule::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -0.15em;
+    width: 100%;
+    height: 1px;
+    background-color: currentColor;
+    transform: scaleX(0);
+    transform-origin: right center;
+    transition: transform var(--dur-base) var(--ease-inout);
+  }
+
+  .link-rule:hover::after,
+  .link-rule:focus-visible::after {
+    transform: scaleX(1);
+    transform-origin: left center;
+  }
+
+  /* Figures scale inside a fixed frame so the crop moves, not
+     the layout. Nothing here can shift the page. */
+  .figure-frame {
+    overflow: hidden;
+    position: relative;
+    background-color: var(--color-ink-raised);
+  }
+
+  .figure-frame > * {
+    transition: transform var(--dur-slow) var(--ease-out);
+    will-change: transform;
+  }
+
+  .group\/figure:hover .figure-frame > *,
+  .group\/figure:focus-visible .figure-frame > * {
+    transform: scale(1.04);
+  }
+}
+
+/* ============================================================
+   CUSTOM CURSOR
+   Two elements: a solid dot that tracks precisely and a ring
+   that lags behind it. The ring opens up over interactive
+   targets. Positioned by transform only — never layout.
+   ============================================================ */
+
+.cursor-dot,
+.cursor-ring {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 90;
+  pointer-events: none;
+  border-radius: 9999px;
+  opacity: 0;
+  transition: opacity var(--dur-base) var(--ease-out);
+}
+
+.cursor-dot {
+  width: 6px;
+  height: 6px;
+  margin: -3px 0 0 -3px;
+  background-color: var(--color-clay);
+}
+
+.cursor-ring {
+  width: 34px;
+  height: 34px;
+  margin: -17px 0 0 -17px;
+  border: 1px solid var(--color-clay);
+  transition:
+    opacity var(--dur-base) var(--ease-out),
+    width var(--dur-base) var(--ease-out),
+    height var(--dur-base) var(--ease-out),
+    margin var(--dur-base) var(--ease-out),
+    background-color var(--dur-base) var(--ease-out);
+}
+
+[data-cursor-visible="true"] .cursor-dot,
+[data-cursor-visible="true"] .cursor-ring {
+  opacity: 1;
+}
+
+[data-cursor-active="true"] .cursor-ring {
+  width: 64px;
+  height: 64px;
+  margin: -32px 0 0 -32px;
+  background-color: rgb(201 141 130 / 0.12);
+}
+
+[data-cursor-active="true"] .cursor-dot {
+  opacity: 0;
+}
+
+/* ============================================================
+   REDUCED MOTION
+   Everything arrives at its final state instantly. The custom
+   cursor is switched off entirely and the native one returns.
+   ============================================================ */
 
 @media (prefers-reduced-motion: reduce) {
   *,
@@ -39,6 +344,23 @@
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
+    /* Delays matter as much as durations here: a staggered block
+       with `animation-fill-mode: both` would otherwise sit in its
+       start state — masked out of sight — for the whole stagger. */
+    animation-delay: 0ms !important;
+    transition-delay: 0ms !important;
     scroll-behavior: auto !important;
+  }
+
+  [data-js] .reveal,
+  [data-js] .mask-line > span,
+  [data-js] .rule-draw {
+    opacity: 1;
+    transform: none;
+  }
+
+  .cursor-dot,
+  .cursor-ring {
+    display: none;
   }
 }

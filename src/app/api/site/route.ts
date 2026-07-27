@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { SITE, PROJECTS, SERVICES } from "@/lib/site";
+import { CAPABILITIES, PROCESS, PROJECTS, PROMISE, SITE } from "@/lib/site";
 
 export const revalidate = 300;
 
@@ -9,11 +9,12 @@ export async function GET(): Promise<NextResponse> {
       name: SITE.name,
       url: SITE.url,
       description: SITE.description,
-      headline: SITE.headline,
-      subHeadline: SITE.subHeadline,
+      tagline: SITE.tagline,
+      promise: PROMISE.short,
       contactEmail: SITE.contactEmail,
+      process: PROCESS,
+      capabilities: CAPABILITIES,
       projects: PROJECTS,
-      services: SERVICES,
     },
     {
       headers: {

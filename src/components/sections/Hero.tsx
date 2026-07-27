@@ -1,38 +1,75 @@
-import { ArrowRight } from "lucide-react";
-import { Button } from "../primitives/Button";
+import type { CSSProperties } from "react";
 import { Container } from "../primitives/Container";
-import { Eyebrow } from "../primitives/Eyebrow";
-import { ThreeBlkLogo } from "../brand/ThreeBlkLogo";
-import { SITE } from "@/lib/site";
+import { MaskText } from "../primitives/MaskText";
+import { ButtonLink } from "../primitives/Button";
+import { PROMISE, SITE } from "@/lib/site";
 
+/**
+ * First screen. Everything here animates from CSS on load rather
+ * than from an observer after hydration, so the largest text is
+ * painting on the first frame instead of waiting for JavaScript.
+ */
 export function Hero() {
   return (
     <section
       id="hero"
       aria-labelledby="hero-heading"
-      className="relative pt-28 md:pt-40 pb-20 md:pb-32"
+      className="relative flex min-h-svh flex-col justify-between pb-section-tight pt-[calc(var(--space-section)+4rem)]"
     >
-      <Container>
-        <div className="flex flex-col gap-8 max-w-4xl">
-          <ThreeBlkLogo variant="mark-filled" className="h-20 w-20 md:h-24 md:w-24" />
-          <Eyebrow>Solo digital studio</Eyebrow>
-          <h1
-            id="hero-heading"
-            className="text-display-2 md:text-display-1 text-text-primary"
+      <Container className="flex flex-1 flex-col justify-center gap-block">
+        <div className="hero-fade flex flex-wrap items-center gap-x-6 gap-y-2 font-mono text-overline uppercase text-text-tertiary">
+          <span className="flex items-center gap-3">
+            <span aria-hidden="true" className="h-px w-8 bg-text-accent" />
+            Design-led web studio
+          </span>
+          <span aria-hidden="true" className="hidden h-px w-8 bg-rule-strong sm:block" />
+          <span>{SITE.location}</span>
+        </div>
+
+        <MaskText
+          as="h1"
+          id="hero-heading"
+          lines={PROMISE.headline}
+          trigger="load"
+          delay={1}
+          className="font-display text-display-1 text-text-primary"
+        />
+
+        <div className="grid grid-cols-12 items-end gap-x-gutter gap-y-block">
+          <p
+            className="hero-fade col-span-12 max-w-measure text-body-lg text-text-secondary md:col-span-7 lg:col-span-6"
+            style={{ "--reveal-delay": 5 } as CSSProperties}
           >
-            {SITE.headline}
-          </h1>
-          <p className="text-body-lg md:text-h4 text-text-secondary max-w-2xl">
-            {SITE.subHeadline}
+            {PROMISE.standfirst}
           </p>
-          <div className="flex flex-wrap gap-3 pt-2">
-            <Button href="#contact" variant="primary">
-              Book a call <ArrowRight size={18} aria-hidden="true" />
-            </Button>
-            <Button href="#work" variant="secondary">
-              See work
-            </Button>
+
+          <div
+            className="hero-fade col-span-12 flex flex-wrap items-center gap-4 md:col-span-5 md:justify-end lg:col-span-6"
+            style={{ "--reveal-delay": 6 } as CSSProperties}
+          >
+            <ButtonLink href="#contact" variant="solid">
+              Start a project
+            </ButtonLink>
+            <ButtonLink href="#work" variant="line">
+              See the work
+            </ButtonLink>
           </div>
+        </div>
+      </Container>
+
+      <Container
+        className="hero-fade mt-block"
+        style={{ "--reveal-delay": 7 } as CSSProperties}
+      >
+        <div className="flex flex-wrap items-center justify-between gap-4 border-t border-rule pt-6 font-mono text-overline uppercase text-text-tertiary">
+          <span>No deposit &middot; No obligation</span>
+          <span className="hidden md:inline">{SITE.tagline}</span>
+          <a
+            href="#process"
+            className="link-rule text-text-accent transition-colors duration-base ease-inout hover:text-clay-hover"
+          >
+            How it works
+          </a>
         </div>
       </Container>
     </section>

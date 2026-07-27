@@ -1,13 +1,23 @@
-import type { HTMLAttributes, ReactNode } from "react";
+import type { ElementType, HTMLAttributes, ReactNode } from "react";
 
-type ContainerProps = HTMLAttributes<HTMLDivElement> & {
+type ContainerProps = HTMLAttributes<HTMLElement> & {
   readonly children: ReactNode;
+  readonly as?: ElementType;
 };
 
-export function Container({ children, className = "", ...rest }: ContainerProps) {
+/** The page measure: centred, capped, and inset by the gutter. */
+export function Container({
+  children,
+  className = "",
+  as: Tag = "div",
+  ...rest
+}: ContainerProps) {
   return (
-    <div className={`mx-auto w-full max-w-6xl px-6 md:px-10 ${className}`.trim()} {...rest}>
+    <Tag
+      className={`mx-auto w-full max-w-container px-gutter ${className}`.trim()}
+      {...rest}
+    >
       {children}
-    </div>
+    </Tag>
   );
 }

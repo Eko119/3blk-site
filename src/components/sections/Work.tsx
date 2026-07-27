@@ -1,44 +1,87 @@
-import { ArrowUpRight } from "lucide-react";
 import { Container } from "../primitives/Container";
 import { SectionHeading } from "../primitives/SectionHeading";
+import { Reveal } from "../primitives/Reveal";
+import { ProjectArt } from "../art/ProjectArt";
 import { PROJECTS } from "@/lib/site";
 
+/**
+ * Selected work, set as an editorial spread. Entries alternate
+ * sides so the eye crosses the page rather than running down a
+ * column of identical cards.
+ */
 export function Work() {
   return (
     <section
       id="work"
       aria-labelledby="work-heading"
-      className="py-20 md:py-32 border-t border-border-default"
+      className="border-t border-rule py-section"
     >
-      <Container>
-        <div className="flex flex-col gap-12">
-          <SectionHeading id="work-heading" eyebrow="Selected work">
-            Live projects, shipped on this stack.
-          </SectionHeading>
-          <ul className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {PROJECTS.map((project) => (
-              <li key={project.id}>
-                <a
-                  href={project.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="group flex flex-col gap-4 h-full p-6 md:p-8 bg-elevated border border-border-default rounded-lg transition-colors duration-default ease-standard hover:border-border-strong"
-                >
-                  <div className="flex items-start justify-between gap-4">
-                    <h3 className="text-h3 text-text-primary">{project.name}</h3>
-                    <ArrowUpRight
-                      size={20}
-                      className="text-text-tertiary transition-colors group-hover:text-text-accent shrink-0 mt-1"
-                      aria-hidden="true"
-                    />
-                  </div>
-                  <p className="text-body-sm text-text-secondary">{project.description}</p>
-                  <p className="text-mono-sm text-text-tertiary mt-auto">{project.tech}</p>
-                </a>
-              </li>
-            ))}
-          </ul>
+      <Container className="flex flex-col gap-section-tight">
+        <div className="grid grid-cols-12 gap-x-gutter gap-y-block">
+          <SectionHeading
+            id="work-heading"
+            eyebrow="Selected work"
+            lines={["Every one of these", "was built before", "it was bought."]}
+            className="col-span-12 lg:col-span-8"
+          />
+          <Reveal delay={2} className="col-span-12 self-end lg:col-span-3 lg:col-start-10">
+            <p className="font-mono text-overline uppercase text-text-tertiary">
+              {PROJECTS.length} of a longer list — the rest is shared on the
+              briefing call
+            </p>
+          </Reveal>
         </div>
+
+        <ul className="flex flex-col gap-section-tight">
+          {PROJECTS.map((project, index) => {
+            const flipped = index % 2 === 1;
+            return (
+              <li key={project.id}>
+                <Reveal className="group/figure grid grid-cols-12 items-center gap-x-gutter gap-y-block">
+                  <div
+                    className={`col-span-12 md:col-span-6 ${
+                      flipped ? "md:order-2 lg:col-span-5 lg:col-start-8" : "lg:col-span-5"
+                    }`}
+                  >
+                    <div className="figure-frame aspect-[4/5] w-full">
+                      <ProjectArt art={project.art} />
+                    </div>
+                  </div>
+
+                  <div
+                    className={`col-span-12 flex flex-col gap-6 md:col-span-6 ${
+                      flipped ? "md:order-1 lg:col-span-5 lg:col-start-2" : "lg:col-span-5 lg:col-start-7"
+                    }`}
+                  >
+                    <div className="flex items-baseline justify-between gap-6 border-b border-rule pb-4 font-mono text-overline uppercase text-text-tertiary">
+                      <span>{project.discipline}</span>
+                      <span>{project.year}</span>
+                    </div>
+
+                    <h3 className="font-display text-display-3 text-text-primary">
+                      {project.name}
+                    </h3>
+
+                    <p className="max-w-measure text-body-lg text-text-secondary">
+                      {project.summary}
+                    </p>
+
+                    <ul className="flex flex-wrap gap-x-3 gap-y-2">
+                      {project.scope.map((item) => (
+                        <li
+                          key={item}
+                          className="border border-rule-strong px-3 py-1.5 font-mono text-overline uppercase text-text-tertiary"
+                        >
+                          {item}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </Reveal>
+              </li>
+            );
+          })}
+        </ul>
       </Container>
     </section>
   );
