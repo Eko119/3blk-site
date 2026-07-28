@@ -81,51 +81,109 @@ function AngelTarotPlate({ className }: PlateProps) {
 }
 
 /**
- * Awktane Studios — a contact sheet. An asymmetric modular grid
- * where three cells carry weight and the rest hold their outline,
- * the way an index page carries a few hero frames.
+ * Awktane Studios — a cutting-table layout. Pattern pieces on a
+ * marking grid, joined by a run of basting stitch: one-of-one
+ * garments, drawn the way they are actually made.
  */
 function AwktanePlate({ className }: PlateProps) {
-  /** x, y, w, h, fill */
-  const cells: ReadonlyArray<readonly [number, number, number, number, string]> = [
-    [96, 120, 240, 300, OXBLOOD],
-    [360, 120, 344, 140, "none"],
-    [360, 284, 344, 136, CLAY],
-    [96, 444, 156, 176, "none"],
-    [276, 444, 180, 176, "none"],
-    [480, 444, 224, 176, WINE],
-    [96, 644, 340, 236, "none"],
-    [460, 644, 244, 112, OXBLOOD],
-    [460, 780, 244, 100, "none"],
+  /** Dashed seam runs — x1,y1,x2,y2 */
+  const seams: ReadonlyArray<readonly [number, number, number, number]> = [
+    [150, 250, 150, 560],
+    [330, 250, 330, 560],
+    [150, 250, 330, 250],
+    [470, 300, 470, 620],
+    [650, 300, 650, 620],
+    [470, 300, 650, 300],
+    [180, 700, 620, 700],
+    [180, 700, 180, 880],
+    [620, 700, 620, 880],
   ];
 
   return (
     <svg viewBox="0 0 800 1000" className={className} aria-hidden="true" focusable="false">
       <rect width="800" height="1000" fill={INK} />
 
-      {cells.map(([x, y, w, h, fill]) => (
+      {/* Marking grid */}
+      <g stroke={OXBLOOD} strokeWidth="0.5" opacity="0.4">
+        {[0, 1, 2, 3, 4, 5, 6, 7].map((i) => (
+          <line key={`v${i}`} x1={100 + i * 86} y1="90" x2={100 + i * 86} y2="910" />
+        ))}
+        {[0, 1, 2, 3, 4, 5, 6, 7, 8].map((i) => (
+          <line key={`h${i}`} x1="100" y1={90 + i * 102} x2="702" y2={90 + i * 102} />
+        ))}
+      </g>
+
+      {/* Pattern pieces */}
+      <path d="M150 250 L330 250 L330 470 L240 560 L150 470 Z" fill={OXBLOOD} />
+      <path d="M470 300 L650 300 L650 540 L560 620 L470 540 Z" fill="none" stroke={CLAY} strokeWidth="1.5" />
+      <path d="M180 700 L620 700 L620 820 L400 880 L180 820 Z" fill={WINE} stroke={CLAY} strokeWidth="1" />
+
+      {/* Basting stitch along the seams */}
+      <g stroke={CLAY} strokeWidth="1.5" strokeDasharray="9 11" strokeLinecap="round" opacity="0.95">
+        {seams.map(([x1, y1, x2, y2]) => (
+          <line key={`${x1}-${y1}-${x2}`} x1={x1} y1={y1} x2={x2} y2={y2} />
+        ))}
+      </g>
+
+      {/* Notches */}
+      <g fill={BONE} opacity="0.8">
+        <rect x="238" y="246" width="4" height="14" />
+        <rect x="558" y="296" width="4" height="14" />
+        <rect x="398" y="696" width="4" height="14" />
+      </g>
+    </svg>
+  );
+}
+
+/**
+ * DJ Turnt — a room lit from a single point. Beams open across the
+ * floor over a run of level bars: a promoter's work is a crowd and
+ * the light hitting it.
+ */
+function DjTurntPlate({ className }: PlateProps) {
+  const beams = [-58, -36, -15, 6, 27, 48];
+  const bars = [64, 128, 92, 176, 240, 148, 208, 116, 268, 152, 96, 200];
+
+  return (
+    <svg viewBox="0 0 800 1000" className={className} aria-hidden="true" focusable="false">
+      <rect width="800" height="1000" fill={INK} />
+
+      {/* Beams from the rig */}
+      <g opacity="0.55">
+        {beams.map((deg) => (
+          <polygon
+            key={deg}
+            points="0,-16 620,-150 620,150 0,16"
+            fill={deg % 2 === 0 ? OXBLOOD : WINE}
+            transform={`translate(400 170) rotate(${deg + 90})`}
+          />
+        ))}
+      </g>
+
+      {/* The source */}
+      <circle cx="400" cy="170" r="46" fill={CLAY} />
+      <circle cx="400" cy="170" r="76" fill="none" stroke={CLAY} strokeWidth="1" opacity="0.7" />
+
+      {/* Floor line and crowd level */}
+      <rect x="96" y="792" width="608" height="1" fill={BONE} opacity="0.4" />
+      {bars.map((h, i) => (
         <rect
-          key={`${x}-${y}`}
-          x={x}
-          y={y}
-          width={w}
+          key={i}
+          x={96 + i * 52}
+          y={792 - h}
+          width={34}
           height={h}
-          fill={fill}
-          stroke={fill === "none" ? OXBLOOD : "none"}
-          strokeWidth="1"
+          fill={h > 200 ? CLAY : OXBLOOD}
         />
       ))}
 
-      {/* Registration marks at the trim */}
-      <g fill={CLAY}>
-        <rect x="96" y="72" width="28" height="1" />
-        <rect x="96" y="72" width="1" height="28" />
-        <rect x="676" y="72" width="28" height="1" />
-        <rect x="703" y="72" width="1" height="28" />
-        <rect x="96" y="927" width="28" height="1" />
-        <rect x="96" y="900" width="1" height="28" />
-        <rect x="676" y="927" width="28" height="1" />
-        <rect x="703" y="900" width="1" height="28" />
+      {/* Marquee band. Bulbs span 130→670 so the run stays inside
+          the band rather than spilling onto the floor past 704. */}
+      <rect x="96" y="856" width="608" height="52" fill={OXBLOOD} />
+      <g fill={BONE} opacity="0.9">
+        {Array.from({ length: 11 }, (_, i) => (
+          <circle key={i} cx={130 + i * 54} cy="882" r="5" />
+        ))}
       </g>
     </svg>
   );
@@ -179,6 +237,7 @@ const PLATES: Record<Project["art"], (props: PlateProps) => React.JSX.Element> =
   angeltarot: AngelTarotPlate,
   awktane: AwktanePlate,
   sonofsam: SonOfSamPlate,
+  djturnt: DjTurntPlate,
 };
 
 type ProjectArtProps = {
