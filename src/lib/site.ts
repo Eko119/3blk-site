@@ -54,12 +54,18 @@ export const PROMISE = {
 
 export type NavLink = { readonly href: string; readonly label: string };
 
+/**
+ * Rooted at "/" rather than bare fragments, because the header and
+ * footer render on every route. A bare "#work" points at nothing
+ * from /privacy; "/#work" resolves from anywhere, and next/link
+ * still scrolls rather than reloading when we are already home.
+ */
 export const NAV_LINKS: readonly NavLink[] = [
-  { href: "#process", label: "How it works" },
-  { href: "#work", label: "Work" },
-  { href: "#capabilities", label: "Capabilities" },
-  { href: "#studio", label: "Studio" },
-  { href: "#contact", label: "Contact" },
+  { href: "/#process", label: "How it works" },
+  { href: "/#work", label: "Work" },
+  { href: "/#capabilities", label: "Capabilities" },
+  { href: "/#studio", label: "Studio" },
+  { href: "/#contact", label: "Contact" },
 ] as const;
 
 /* ─── Marquee ───────────────────────────────────────────────── */
@@ -255,6 +261,91 @@ export const FAQ: readonly FaqItem[] = [
     question: "What happens if we say no?",
     answer:
       "Nothing. You owe us nothing and we keep the work unpublished. No deposit is taken at any point, so there is nothing to refund and nothing to argue about.",
+  },
+] as const;
+
+/* ─── Privacy ───────────────────────────────────────────────
+   Describes what the site actually does, and nothing more. If the
+   contact route, the analytics gate or the cookie behaviour ever
+   change, this has to change with them.
+   ────────────────────────────────────────────────────────── */
+
+export type PrivacySection = {
+  readonly id: string;
+  readonly heading: string;
+  readonly body: readonly string[];
+};
+
+export const PRIVACY_UPDATED = "27 July 2026";
+
+export const PRIVACY: readonly PrivacySection[] = [
+  {
+    id: "collect",
+    heading: "What we collect",
+    body: [
+      "Only what you type into the contact form: your name, your email address, and your message. That is the whole list.",
+      "We do not ask for a company, a budget, a phone number or a job title, because none of those are needed to reply to you.",
+    ],
+  },
+  {
+    id: "why",
+    heading: "Why we collect it",
+    body: [
+      "To read your enquiry and answer it. That is the only purpose. We do not add you to a mailing list, and we will not send you anything you did not ask for.",
+    ],
+  },
+  {
+    id: "where",
+    heading: "Where it goes",
+    body: [
+      "The form posts to this site, which hands the message to Resend, our email provider, which delivers it to the studio inbox. Your email address is set as the reply-to so we can write back.",
+      "It is not written to a database. There is no CRM behind this form. The message exists as an email and nowhere else.",
+    ],
+  },
+  {
+    id: "keep",
+    heading: "How long we keep it",
+    body: [
+      "For as long as the email sits in the inbox — in practice, until the conversation is finished and the thread is cleared out.",
+      "If you would rather it were gone sooner, ask, and we will delete it and confirm that we have.",
+    ],
+  },
+  {
+    id: "cookies",
+    heading: "Cookies",
+    body: [
+      "This site sets none. No consent banner appears because there is nothing to consent to. Nothing follows you between visits and nothing follows you to other sites.",
+    ],
+  },
+  {
+    id: "analytics",
+    heading: "Analytics",
+    body: [
+      "We use Vercel Analytics to count page views and see which sections people read. It is cookieless, it does not build a profile of you, and it does not share data across sites.",
+    ],
+  },
+  {
+    id: "others",
+    heading: "Who else is involved",
+    body: [
+      "Vercel hosts the site and serves it to you, so it necessarily handles your request. Resend delivers the contact email. Those are the only two.",
+      "Nothing is sold, rented, or handed to advertisers or data brokers. There is no third party here whose business model is your attention.",
+    ],
+  },
+  {
+    id: "rights",
+    heading: "Your rights",
+    body: [
+      "You can ask what we hold about you, ask for a copy of it, ask us to correct it, or ask us to delete it. Email the studio and we will do it — there is no form to fill in and no ticket to raise.",
+      "Depending on where you live you may also have the right to complain to a data protection regulator. We would rather you told us first so we can put it right.",
+    ],
+  },
+  {
+    id: "changes",
+    heading: "Changes",
+    body: [
+      "If what the site does with your data changes, this page changes with it and the date above is updated. We will not quietly broaden it.",
+    ],
   },
 ] as const;
 
