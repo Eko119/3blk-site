@@ -29,13 +29,14 @@ export async function POST(request: Request): Promise<NextResponse> {
     return NextResponse.redirect(new URL("/?sent=invalid#contact", request.url), 303);
   }
 
-  const fromHost = new URL(SITE.url).hostname;
+  // Deliberately SITE.emailDomain, not the hostname from SITE.url —
+  // the canonical origin is www, and mail must not come from there.
   const toAddress = process.env.CONTACT_TO_EMAIL ?? SITE.contactEmail;
 
   try {
     const resend = getResend();
     await resend.emails.send({
-      from: `${SITE.name} <hello@${fromHost}>`,
+      from: `${SITE.name} <hello@${SITE.emailDomain}>`,
       to: toAddress,
       replyTo: email,
       subject: `New inquiry from ${name}`,

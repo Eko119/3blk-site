@@ -8,7 +8,17 @@
 export const SITE = {
   name: "3BLK Studios",
   shortName: "3BLK",
-  url: "https://3blk.com",
+  /**
+   * The canonical origin — the one that actually serves. The apex
+   * 308-redirects to www, so naming the apex here would point every
+   * canonical, OG tag and sitemap entry at a URL that redirects.
+   */
+  url: "https://www.3blk.com",
+  /**
+   * The registrable domain, kept separate from `url` on purpose:
+   * outbound mail must come from 3blk.com, never www.3blk.com.
+   */
+  emailDomain: "3blk.com",
   description:
     "3BLK Studios is a design-led web studio. We design and build your site before you pay for it — you only commission the work once you have seen it finished.",
   tagline: "Built before billed.",
@@ -163,43 +173,54 @@ export type Project = {
   readonly id: string;
   readonly name: string;
   readonly discipline: string;
-  readonly year: string;
+  /** The live site. Shown as its hostname and linked from the card. */
+  readonly href: string;
   readonly summary: string;
   readonly scope: readonly string[];
   /** Art key — maps to a composition in components/art/ProjectArt. */
-  readonly art: "angeltarot" | "awktane" | "sonofsam";
+  readonly art: "angeltarot" | "awktane" | "sonofsam" | "djturnt";
 };
 
 export const PROJECTS: readonly Project[] = [
   {
     id: "angeltarot",
     name: "AngelTarot",
-    discipline: "Identity & platform",
-    year: "2025",
+    discipline: "Identity & booking platform",
+    href: "https://angeltarot.net",
     summary:
-      "A reading practice that had outgrown a social profile. We gave it a mark, a typographic voice and a booking flow that reads as considered rather than transactional — the calm of a print edition, on a phone.",
-    scope: ["Identity", "Art direction", "Next.js build", "Booking flow"],
+      "A reading practice with something real to sell and no clean way to sell it. We gave it a mark, a typographic voice, and a booking flow that treats a thirty-dollar reading as a considered purchase rather than a direct message — including a recurring forecast product that gives people a reason to come back.",
+    scope: ["Identity", "Art direction", "Booking flow", "Payments"],
     art: "angeltarot",
   },
   {
     id: "awktane",
     name: "Awktane Studios",
-    discipline: "Studio site",
-    year: "2025",
+    discipline: "Brand & storefront",
+    href: "https://awktanestudios.com",
     summary:
-      "A creative studio whose portfolio was stronger than its presentation of it. The site was rebuilt as a gallery: full-bleed work, restrained typography, and an index that lets a producer scan twenty projects in under a minute.",
-    scope: ["Editorial design", "Motion", "Custom build", "Case studies"],
+      "One-of-one hand-sewn streetwear out of Tampa, shipping worldwide. Nothing repeats, which makes it a difficult thing to merchandise — so the site is built so a single garment can hold an entire page rather than being flattened into a grid of thumbnails.",
+    scope: ["Brand identity", "Art direction", "Storefront", "Custom build"],
     art: "awktane",
   },
   {
-    id: "son-of-sam",
-    name: "Son of Sam — DJ Turnt",
-    discipline: "Artist platform",
-    year: "2024",
+    id: "sonofsam",
+    name: "SONOFSAM777",
+    discipline: "Artist site",
+    href: "https://sonofsam777.pages.dev",
     summary:
-      "A release site for an artist with a heavy media load and an audience on mobile data. Edge-delivered, weightless on a phone, and loud where it needed to be — without a single frame dropped on the way in.",
-    scope: ["Art direction", "Edge delivery", "Media pipeline", "Release pages"],
+      "A release site built around one job: get people to the record. Deliberately spare, edge-delivered, and near-weightless on mobile data — the whole page lands before a heavier site has finished measuring itself.",
+    scope: ["Art direction", "Edge delivery", "Release page", "Streaming links"],
     art: "sonofsam",
+  },
+  {
+    id: "djturnt",
+    name: "DJ Turnt",
+    discipline: "Booking site",
+    href: "https://djturnt.pages.dev",
+    summary:
+      "Club promoter, entertainer and comedian, where the proof is the footage. A booking site carrying a heavy reel of promo video that still opens fast on a phone in a venue car park, with the enquiry never more than one tap away.",
+    scope: ["Art direction", "Video delivery", "Booking flow", "Events"],
+    art: "djturnt",
   },
 ] as const;
 
