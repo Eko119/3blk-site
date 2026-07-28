@@ -43,7 +43,7 @@ export default function NotFound() {
             {NAV_LINKS.map((link) => (
               <li key={link.href}>
                 <Link
-                  href={`/${link.href}`}
+                  href={link.href}
                   className="link-rule font-mono text-overline uppercase text-text-secondary transition-colors duration-base ease-inout hover:text-text-primary"
                 >
                   {link.label}

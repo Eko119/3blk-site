@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { Container } from "../primitives/Container";
 import { ThreeBlkMark } from "../brand/ThreeBlkLogo";
 import { MaskText } from "../primitives/MaskText";
@@ -33,12 +34,12 @@ export function Footer() {
             <ul className="flex flex-col gap-3">
               {NAV_LINKS.map((link) => (
                 <li key={link.href}>
-                  <a
+                  <Link
                     href={link.href}
                     className="link-rule text-body-sm text-text-secondary transition-colors duration-base ease-inout hover:text-text-primary"
                   >
                     {link.label}
-                  </a>
+                  </Link>
                 </li>
               ))}
             </ul>
@@ -72,8 +73,14 @@ export function Footer() {
           <span>
             &copy; {year} {SITE.name}
           </span>
+          <Link
+            href="/privacy"
+            className="link-rule transition-colors duration-base ease-inout hover:text-text-primary"
+          >
+            Privacy
+          </Link>
           <a
-            href="#hero"
+            href="#main"
             className="link-rule transition-colors duration-base ease-inout hover:text-text-primary"
           >
             Back to top

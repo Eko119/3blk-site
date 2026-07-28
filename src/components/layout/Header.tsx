@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import {
   useCallback,
   useEffect,
@@ -149,35 +150,35 @@ export function Header() {
         className={`fixed inset-x-0 top-0 z-50 border-b transition-colors duration-slow ease-inout ${tone.shell}`}
       >
       <Container className="flex h-20 items-center justify-between gap-6">
-        <a
-          href="#hero"
+        <Link
+          href="/"
           className={`transition-colors duration-base ease-inout ${tone.logo}`}
           aria-label={`${SITE.name} — home`}
         >
           <ThreeBlkLockup className="text-[0.95rem]" />
-        </a>
+        </Link>
 
         <nav aria-label="Primary" className="hidden lg:block">
           <ul className="flex items-center gap-10">
             {NAV_LINKS.map((link) => (
               <li key={link.href}>
-                <a
+                <Link
                   href={link.href}
                   className={`link-rule font-mono text-overline uppercase transition-colors duration-base ease-inout ${tone.nav}`}
                 >
                   {link.label}
-                </a>
+                </Link>
               </li>
             ))}
           </ul>
         </nav>
 
-        <a
-          href="#contact"
+        <Link
+          href="/#contact"
           className={`link-rule hidden font-mono text-overline uppercase transition-colors duration-base ease-inout lg:inline-block ${tone.cta}`}
         >
           Start a project
-        </a>
+        </Link>
 
         <button
           ref={triggerRef}
@@ -226,7 +227,7 @@ export function Header() {
             <ul className="flex flex-col">
               {NAV_LINKS.map((link, index) => (
                 <li key={link.href} className="border-b border-rule">
-                  <a
+                  <Link
                     href={link.href}
                     onClick={close}
                     className="hero-fade flex items-baseline justify-between gap-6 py-6 font-display text-display-3 text-text-primary transition-colors duration-base ease-inout hover:text-clay"
@@ -236,7 +237,7 @@ export function Header() {
                     <span className="font-mono text-overline uppercase text-text-tertiary">
                       {String(index + 1).padStart(2, "0")}
                     </span>
-                  </a>
+                  </Link>
                 </li>
               ))}
             </ul>
