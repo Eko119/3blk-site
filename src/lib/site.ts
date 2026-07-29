@@ -32,6 +32,8 @@ export type Channel = {
   readonly label: string;
   readonly value: string;
   readonly href: string;
+  /** Leaves the site, so it needs target and rel. */
+  readonly external: boolean;
 };
 
 export const CHANNELS: readonly Channel[] = [
@@ -40,14 +42,22 @@ export const CHANNELS: readonly Channel[] = [
     label: "Email",
     value: SITE.contactEmail,
     href: `mailto:${SITE.contactEmail}`,
+    external: false,
   },
   {
     id: "instagram",
     label: "Instagram",
-    value: "@3blk",
-    href: "https://instagram.com/3blk",
+    value: "@3blk.studios",
+    href: "https://instagram.com/3blk.studios",
+    external: true,
   },
 ] as const;
+
+/** Applied to any channel link that leaves the site. */
+export const EXTERNAL_LINK_PROPS = {
+  target: "_blank",
+  rel: "noreferrer noopener",
+} as const;
 
 /** The promise, expressed three ways for three contexts. */
 export const PROMISE = {

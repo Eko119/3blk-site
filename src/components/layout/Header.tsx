@@ -10,7 +10,7 @@ import {
 } from "react";
 import { Container } from "../primitives/Container";
 import { ThreeBlkLockup } from "../brand/ThreeBlkLogo";
-import { CHANNELS, NAV_LINKS, SITE } from "@/lib/site";
+import { CHANNELS, EXTERNAL_LINK_PROPS, NAV_LINKS, SITE } from "@/lib/site";
 
 /** Vertical midpoint of the 5rem bar — the line we test sections against. */
 const HEADER_MID = 40;
@@ -248,9 +248,7 @@ export function Header() {
               <a
                 key={channel.id}
                 href={channel.href}
-                {...(channel.id === "instagram"
-                  ? { target: "_blank", rel: "noreferrer noopener" }
-                  : {})}
+                {...(channel.external ? EXTERNAL_LINK_PROPS : {})}
                 className="link-rule self-start font-display text-h2 text-text-primary"
               >
                 {channel.value}
