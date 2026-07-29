@@ -4,7 +4,7 @@ import { MaskText } from "../primitives/MaskText";
 import { Reveal } from "../primitives/Reveal";
 import { Button } from "../primitives/Button";
 import { ContactStatus } from "./ContactStatus";
-import { CHANNELS, CONTACT } from "@/lib/site";
+import { CHANNELS, CONTACT, EXTERNAL_LINK_PROPS } from "@/lib/site";
 
 const FIELD =
   "w-full border-b border-rule-strong bg-transparent pb-3 pt-2 text-body-lg text-text-primary transition-colors duration-base ease-inout placeholder:text-text-tertiary hover:border-clay focus:border-clay focus:outline-none focus-visible:outline-none";
@@ -49,9 +49,7 @@ export function Contact() {
                     </span>
                     <a
                       href={channel.href}
-                      {...(channel.id === "instagram"
-                        ? { target: "_blank", rel: "noreferrer noopener" }
-                        : {})}
+                      {...(channel.external ? EXTERNAL_LINK_PROPS : {})}
                       className="link-rule self-start font-display text-h2 text-text-primary transition-colors duration-base ease-inout hover:text-clay"
                     >
                       {channel.value}

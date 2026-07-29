@@ -3,7 +3,7 @@ import { Container } from "../primitives/Container";
 import { ThreeBlkMark } from "../brand/ThreeBlkLogo";
 import { MaskText } from "../primitives/MaskText";
 import { Reveal } from "../primitives/Reveal";
-import { CHANNELS, NAV_LINKS, PROMISE, SITE } from "@/lib/site";
+import { CHANNELS, EXTERNAL_LINK_PROPS, NAV_LINKS, PROMISE, SITE } from "@/lib/site";
 
 export function Footer() {
   const year = new Date().getFullYear();
@@ -54,9 +54,7 @@ export function Footer() {
                 <li key={channel.id}>
                   <a
                     href={channel.href}
-                    {...(channel.id === "instagram"
-                      ? { target: "_blank", rel: "noreferrer noopener" }
-                      : {})}
+                    {...(channel.external ? EXTERNAL_LINK_PROPS : {})}
                     className="link-rule transition-colors duration-base ease-inout hover:text-text-primary"
                   >
                     {channel.value}

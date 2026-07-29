@@ -4,7 +4,7 @@ import { Container } from "@/components/primitives/Container";
 import { Eyebrow } from "@/components/primitives/Eyebrow";
 import { MaskText } from "@/components/primitives/MaskText";
 import { Reveal } from "@/components/primitives/Reveal";
-import { CHANNELS, PRIVACY, PRIVACY_UPDATED, SITE } from "@/lib/site";
+import { CHANNELS, EXTERNAL_LINK_PROPS, PRIVACY, PRIVACY_UPDATED, SITE } from "@/lib/site";
 
 export const dynamic = "force-static";
 
@@ -77,9 +77,7 @@ export default function PrivacyPage() {
                 </span>
                 <a
                   href={channel.href}
-                  {...(channel.id === "instagram"
-                    ? { target: "_blank", rel: "noreferrer noopener" }
-                    : {})}
+                  {...(channel.external ? EXTERNAL_LINK_PROPS : {})}
                   className="link-rule self-start font-display text-h2 text-text-primary transition-colors duration-base ease-inout hover:text-clay"
                 >
                   {channel.value}
